@@ -434,7 +434,12 @@
 <p>a &#x3D; 10</p>
 </blockquote>
 <p>  从输出中能看出函数<code>void func(int x)</code>并没有达到我们预期的效果<br>  那么这个时候就需要搬出我们<strong>指针</strong>的基本概念了</p>
-<h2 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h2>
+<h2 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h2><p>  <strong>指针</strong> 也是一种变量，与普通变量不同的是，指针中保存的是另一个变量在内存中的地址<br>  通常会以这样的方式声明</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//[数据类型] *[命名];</span>
+  <span class="token keyword">int</span> <span class="token operator">*</span>pointer_int<span class="token punctuation">;</span>
+  <span class="token keyword">double</span> <span class="token operator">*</span>pointer_double<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>  谈到地址，就需要了解我们的 <strong>&amp;</strong> 运算符，或者叫 <strong>取地址符</strong><br>  例如我们声明一个<code>int x = 10</code> 那么<code>&amp;x</code>就是<code>x</code>的地址</p>
+
                 
             </div>
             <hr/>
