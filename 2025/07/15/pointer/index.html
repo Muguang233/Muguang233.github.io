@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="第一个程序, 暮光的个人主页">
-    <meta name="description" content="或许大多数人最初接触的编程语言并不是C语言，但作为一门接近底层的语言，C语言相比许多高级语言，更直接地操作内存和硬件，这也使它在各个领域中占据着重要地位。学习C语言不仅有助于我们理解计算机的底层运行机制，还能为掌握其他编程语言打下坚实的基础">
+    <meta name="keywords" content="指针入门到入坟, 暮光的个人主页">
+    <meta name="description" content="前言  学习C语言的初学者虽然我也是在接触了函数的概念后，可能会想:  如何做到在辅助函数里修改main函数中的局部变量 
+  以下代码，假设我已经在main函数里声明了一个命名为a的整数变量并赋值为10  并且声明一个叫做func的辅助函">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>第一个程序 | 暮光的个人主页</title>
+    <title>指针入门到入坟 | 暮光的个人主页</title>
     <link rel="icon" type="image/jpeg" href="/medias/logo.jpg">
     
 
@@ -334,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">第一个程序</h1>
+                    <h1 class="description center-align post-title">指针入门到入坟</h1>
                 </div>
             </div>
         </div>
@@ -367,6 +368,10 @@
                                 <span class="chip bg-color">C语言</span>
                             </a>
                         
+                            <a href="/tags/%E6%8C%87%E9%92%88/">
+                                <span class="chip bg-color">指针</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -388,7 +393,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-06-21
+                    2025-07-15
                 </div>
                 
 
@@ -412,15 +417,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>或许大多数人最初接触的编程语言并不是C语言，但作为一门接近底层的语言，C语言相比许多高级语言，更直接地操作内存和硬件，这也使它在各个领域中占据着重要地位。学习C语言不仅有助于我们理解计算机的底层运行机制，还能为掌握其他编程语言打下坚实的基础。就像打地基一样，如果基础没有打牢，后续再去补充底层知识往往会因为思维定势而变得更加困难。 ——个人见解</p>
-<h2 id="万物之始"><a href="#万物之始" class="headerlink" title="万物之始"></a>万物之始</h2><h3 id="C语言标准库"><a href="#C语言标准库" class="headerlink" title="C语言标准库"></a>C语言标准库</h3><p>  在我们的经典Hello World之前,首先得理解C语言的基本结构</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  学习C语言的初学者<del>虽然我也是</del>在接触了<a href="/2025/07/15/function/" title="函数">函数</a>的概念后，可能会想:<br>  <strong>如何做到在辅助函数里修改main函数中的局部变量</strong> </p>
+<p>  以下代码，假设我已经在main函数里声明了一个命名为<em>a</em>的整数变量并赋值为10<br>  并且声明一个叫做func的辅助函数将main中<code>int a</code>的值+&#x3D;10</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-
-<span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token comment">//代码实现</span>
+<span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  x <span class="token operator">+=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  但是当我们实际运行代码里的代码块时，我们会得到这样的输出</p>
+<blockquote>
+<p>a &#x3D; 10</p>
+</blockquote>
+<p>  从输出中能看出函数<code>void func(int x)</code>并没有达到我们预期的效果<br>  那么这个时候就需要搬出我们<strong>指针</strong>的基本概念了</p>
+<h2 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h2>
                 
             </div>
             <hr/>
@@ -446,7 +460,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2025/06/21/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">http://example.com/2025/06/21/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/</a>
+                    <a href="http://example.com/2025/07/15/pointer/">http://example.com/2025/07/15/pointer/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -486,6 +500,10 @@
                             
                                 <a href="/tags/C%E8%AF%AD%E8%A8%80/">
                                     <span class="chip bg-color">C语言</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%8C%87%E9%92%88/">
+                                    <span class="chip bg-color">指针</span>
                                 </a>
                             
                         </div>
@@ -568,6 +586,59 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2025/07/15/function/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="函数的基本概念">
+                        
+                        <span class="card-title">函数的基本概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    C语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2025/06/24/hello-world/">
                     <div class="card-image">
                         
@@ -584,9 +655,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-06-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -594,56 +665,6 @@
                             
                         </span>
                     </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/06/21/%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="第一个程序">
-                        
-                        <span class="card-title">第一个程序</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-21
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    C语言
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">C语言</span>
-                    </a>
-                    
                 </div>
                 
             </div>
