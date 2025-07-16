@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="指针入门到入坟, 暮光的个人主页">
-    <meta name="description" content="前言  学习C语言的初学者虽然我也是在接触了函数的概念后，可能会想:  如何做到在辅助函数里修改main函数中的局部变量 
-  以下代码，假设我已经在main函数里声明了一个命名为a的整数变量并赋值为10  并且声明一个叫做func的辅助函">
+    <meta name="keywords" content="指针拓展, 暮光的个人主页">
+    <meta name="description" content="指针与数组的关系字符与字符串  在了解指针之前，很多人或许知道char是字符 char*是字符串，而且字符是单引号&amp;#39;a&amp;#39;，字符串是双引号&amp;quot;a&amp;quot;
+char c = &#39;a&#39;;
+char* str = &#34;a&#34;;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>指针入门到入坟 | 暮光的个人主页</title>
+    <title>指针拓展 | 暮光的个人主页</title>
     <link rel="icon" type="image/jpeg" href="/medias/logo.jpg">
     
 
@@ -335,12 +336,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">指针入门到入坟</h1>
+                    <h1 class="description center-align post-title">指针拓展</h1>
                 </div>
             </div>
         </div>
@@ -393,7 +394,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-15
+                    2025-07-16
                 </div>
                 
 
@@ -417,116 +418,132 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  学习C语言的初学者<del>虽然我也是</del>在接触了<a href="/2025/07/15/function/" title="函数">函数</a>的概念后，可能会想:<br>  <strong>如何做到在辅助函数里修改main函数中的局部变量</strong> </p>
-<p>  以下代码，假设我已经在main函数里声明了一个命名为<em>a</em>的整数变量并赋值为10<br>  并且声明一个叫做func的辅助函数将main中<code>int a</code>的值+&#x3D;10</p>
+                <h2 id="指针与数组的关系"><a href="#指针与数组的关系" class="headerlink" title="指针与数组的关系"></a>指针与数组的关系</h2><h3 id="字符与字符串"><a href="#字符与字符串" class="headerlink" title="字符与字符串"></a>字符与字符串</h3><p>  在了解指针之前，很多人或许知道<code>char</code>是字符 <code>char*</code>是字符串，而且字符是单引号<code>&#39;a&#39;</code>，字符串是双引号<code>&quot;a&quot;</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> c <span class="token operator">=</span> <span class="token char">'a'</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span><span class="token operator">*</span> str <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>  但是这个字符串实际上是长这样的：<code>char str[2] = &#123;&#39;a&#39;, &#39;\0&#39;&#125;;</code><br>  所以<strong>字符串</strong>实际上就是一个字符数组<br>  那么如果说声明一个这样的字符串呢？</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Hello"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  这个字符串在<code>printf</code>中用<code>%s</code>占位符为什么只会输出到<code>Hello</code>为止呢，这个字符串里的实际内容是<code>char str[1000] = &#123;&#39;H&#39;,&#39;e&#39;,&#39;l&#39;,&#39;l&#39;,&#39;o&#39;,&#39;\0&#39;&#125;;</code> 所以终止符<code>\0</code>决定了一个字符串的结尾，即使有内容在<code>\0</code>之后，也不会被输出，就像这样</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token char">'H'</span><span class="token punctuation">,</span><span class="token char">'e'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'o'</span><span class="token punctuation">,</span><span class="token char">'\0'</span><span class="token punctuation">,</span> <span class="token char">'W'</span><span class="token punctuation">,</span><span class="token char">'o'</span><span class="token punctuation">,</span><span class="token char">'r'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'d'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>Hello</p>
+</blockquote>
+<p>  但无论他的实际内容有多少，他在内存空间中占用的大小依旧是声明中的1000字节</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token char">'H'</span><span class="token punctuation">,</span><span class="token char">'e'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'o'</span><span class="token punctuation">,</span><span class="token char">'\0'</span><span class="token punctuation">,</span> <span class="token char">'W'</span><span class="token punctuation">,</span><span class="token char">'o'</span><span class="token punctuation">,</span><span class="token char">'r'</span><span class="token punctuation">,</span><span class="token char">'l'</span><span class="token punctuation">,</span><span class="token char">'d'</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"str的大小为 = %zu字节\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>str的大小为 &#x3D; 1000字节</p>
+</blockquote>
+<p>  回到指针与数组的关系，实际上<code>str</code>是一个指针，他指向的是<strong>这组数据中第一个元素在内存中的地址</strong><br>  我们尝试将<code>str</code>作为地址赋值给指针<code>char* ptr</code>并且输出，会发现他们的输出是一样的</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"Hello World"</span><span class="token punctuation">;</span>
+<span class="token keyword">char</span><span class="token operator">*</span> ptr <span class="token operator">=</span> str<span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%s\n"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  不同于<code>&lt;string.h&gt;</code>库中的<code>strcpy</code>，以上代码的行为是创建一个新的<code>char*</code>指针指向同一个内存空间，所以在这里<code>ptr</code>与<code>str</code>指向的是同一块地址，使用<code>ptr</code>或<code>str</code>任何一个做出修改，因为他们保存的地址是相同的，实际上行为是一样的, 例如对<code>str</code>里保存的地址的值解引用<code>*str = &#39;a&#39;</code> 那么无论是打印<code>str</code>还是<code>ptr</code>，他们都会输出<code>aello World</code></p>
+<h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>  现在我们知道字符串是<strong>一组字符</strong>同时也是一个指针指向<strong>这组字符在内存空间中的地址</strong>, 那么如果我们有一个字符串数组保存多个字符串呢</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span><span class="token operator">*</span> str<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token punctuation">&#123;</span> 
+  <span class="token string">"Hello"</span><span class="token punctuation">,</span>
+  <span class="token string">"World"</span><span class="token punctuation">,</span>
+  <span class="token string">"A long string"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  那么这就是一个指针数组，里面的每个元素都是一个<strong>字符串</strong>也就是<strong>字符数组</strong>或者<strong>字符指针</strong>，所以他是一个保存了三个指针的数组，<em><strong>同时也是一个指针，指向的是这组指针第一个字符串指向的第一个字符的地址</strong></em><br>  我们解一次引用</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  那么他就会是第一个字符串的内容<br>  如果解两次引用</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%c\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token operator">*</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  那就会输出第一个字符串中的第一个字符</p>
+<h3 id="指针计算"><a href="#指针计算" class="headerlink" title="指针计算"></a>指针计算</h3><p>  首先声明一个整数数组</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr_int<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  我们之前说过<code>arr_int</code>实际上是<code>在内存空间中这组数据第一个元素的地址</code>,那么我们声明一个指针指向这个地址</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> arr_int<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  这时候我们解引用并且输出</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>1</p>
+</blockquote>
+<p>如果我们给指针<code>+= 1</code>(解引用)</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr_int<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> arr_int<span class="token punctuation">;</span>
+<span class="token operator">*</span>ptr<span class="token operator">+=</span><span class="token number">1</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们会发现他会输出<code>2</code></p>
+<blockquote>
+<p>2</p>
+</blockquote>
+<p>因为解引用再+&#x3D;是改变地址中保存的值，这个时候<code>arr_int[0]</code>的值也就变成了<code>2</code><br>但要是我们不解引用并且<code>+= 2</code></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr_int<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> arr_int<span class="token punctuation">;</span>
+<span class="token operator">*</span>ptr<span class="token operator">+=</span><span class="token number">1</span>
+ptr<span class="token operator">+=</span><span class="token number">2</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>ptr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>5</p>
+</blockquote>
+<p>我们会发现控制台会输出<code>5</code><br>这是因为上述操作是将ptr中保存的地址往后偏移了<code>2</code>，但是要注意，这里偏移的不是字节，而是<code>sizeof(int)</code>所以实际上是偏移了<code>8</code>字节，将地址往后偏移两个<code>int</code>的大小就等于从<code>arr_int[0]</code>变成<code>arr_int[2]</code></p>
+<h2 id="进阶用法"><a href="#进阶用法" class="headerlink" title="进阶用法"></a>进阶用法</h2><p>  这个时候我们就可以来点不一样的花样<br>  我们可以使用辅助函数来扫描控制台输入</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  x <span class="token operator">+=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">scan_int</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> ptr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入一个整数: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">" %d"</span><span class="token punctuation">,</span> ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"a = %d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+  <span class="token function">scan_int</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x = %d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  但是当我们实际运行代码里的代码块时，我们会得到这样的输出</p>
+<p>就会有这样的效果</p>
 <blockquote>
-<p>a &#x3D; 10</p>
+<p>请输入一个整数: <strong>10</strong><br> x &#x3D; <code>10</code></p>
 </blockquote>
-<p>  从输出中能看出函数<code>void func(int x)</code>并没有达到我们预期的效果<br>  那么这个时候就需要搬出我们<strong>指针</strong>的基本概念了</p>
-<h2 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h2><p>  <strong>指针</strong> 也是一种变量，更是一个数据类型，与普通变量不同的是，指针中保存的是另一个变量在<a href="/2025/07/15/memory/" title="内存空间">内存空间</a>中的地址<br>  通常会以这样的方式声明</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//[数据类型] *[命名];</span>
-  <span class="token keyword">int</span> <span class="token operator">*</span>pointer_int<span class="token punctuation">;</span>
-  <span class="token keyword">double</span> <span class="token operator">*</span>pointer_double<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>  <strong>注意: 这样的声明方式对于初学者会混淆概念 <code>int</code>和<code>int*</code>是两种类型 一个为声明整数类型的变量 一个为声明整数类型的指针 大多数时候都是为了可读性才将<code>*</code>号移动到命名那一侧 不是因为名字里带<code>*</code>号才叫指针 而是他的类型是一个指针</strong></p>
-<h2 id="指针运算符"><a href="#指针运算符" class="headerlink" title="指针运算符"></a>指针运算符</h2><h3 id="取地址符"><a href="#取地址符" class="headerlink" title="取地址符&amp;"></a>取地址符&amp;</h3><p>  说到地址，就需要了解我们指针运算符中的 <code>&amp;</code> 运算符，或者叫 <strong>取地址符</strong><br>  我们声明一个<code>int x = 10</code> 那么<code>&amp;x</code>就是<strong>变量</strong><code>x</code>在<a href="/2025/07/15/memory/" title="内存空间">内存空间</a>中的地址<br>  用以下代码来打印出<code>&amp;x</code>的值 就会显示内存中x的地址</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x的地址为: %p\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<blockquote>
-<p>x的地址为: <code>0x7ffcdf2e5104</code></p>
-</blockquote>
-<h3 id="解引用"><a href="#解引用" class="headerlink" title="解引用*"></a>解引用*</h3><p>  了解完<code>&amp;</code>取地址符后，就需要了解指针运算符中的 <code>*</code>运算符<br>  <code>*</code>作为指针运算符起到的作用是<strong>解引用</strong><br>  可以简单理解为<strong>取出地址里保存的值</strong><br>  当我们在代码中添加<code>*(&amp;x)</code> 并且打印出它的值</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"x的值为: %d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<blockquote>
-<p>x的值为: <code>10</code></p>
-</blockquote>
-<p>  虽然说这样看起来毫无意义，但当我们实际运用的时候情况就会变得不一样</p>
-<h2 id="指针的使用"><a href="#指针的使用" class="headerlink" title="指针的使用"></a>指针的使用</h2><h3 id="声明指针"><a href="#声明指针" class="headerlink" title="声明指针"></a>声明指针</h3><p>  在我们声明指针之前，首先理清楚指针的用途<br>  指针的用途是保存另一个变量的地址，那么我们声明一个整数类型的变量并赋值<code>10</code></p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>  <strong>注意：是有需求才需要声明指针 而不是为了用指针才声明变量 不要为了一碟醋而包一盘饺子</strong></p>
-<p>  假设：我们在main函数里声明了一个<code>int x = 10</code> 并且我想在函数<code>void func(形参)</code>里将这个<code>int x</code>里的值翻倍</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token comment">/*参数*/</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token comment">//代码实现</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  那么这个时候我们就需要在main函数里声明一个指针</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">;</span>
-  <span class="token comment">//或int *p;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  回到我们对指针的定义，指针是一个保存另一个变量在内存空间中的地址的数据<br>  那么给指针赋值就会是这样</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">;</span>
-  p <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
-  <span class="token comment">//也可以简化为一行 int* p = &amp;x;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  <strong>注意：这个指针的命名依旧是<code>p</code> 而不是<code>*p</code> | 正确的理解思路为变量<code>p</code>的类型是<code>int*</code></strong></p>
-<p>  如果没有了解过函数的基本概念，请先看文章<a href="/2025/07/15/memory/" title="内存空间">内存空间</a> 与 <a href="/2025/07/15/function/" title="函数">函数</a></p>
-<h3 id="入参"><a href="#入参" class="headerlink" title="入参"></a>入参</h3><p>  回到正题，我们的函数<code>void func()</code>并没有声明所需的入参，我们的目的是想在辅助函数中修改main函数中的局部变量，那么在辅助函数中，我们就需要在形参中声明一个指针来接收main函数调用时传入的参数，也就是局部变量的地址</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token comment">//代码</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>  这时，我们成功地在辅助函数中声明了一个指针变量<code>p</code>的参数并且他的类型为<code>int*</code>也就是<code>整数指针</code><br>  再回到我们对指针变量的定义: <strong>指针保存的是另一个变量的地址</strong><br>  那么在main函数中，我们需要传入的参数就是我们想传入的变量的地址<br>  在例子里我们提到想把main函数中的<code>int x</code>里的值翻倍，那么我们需要传入的就是<code>x</code>的地址</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token comment">//代码</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">;</span>
-  p <span class="token operator">=</span> <span class="token operator">&amp;</span>x<span class="token punctuation">;</span>
-  <span class="token function">func</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="指针的大小"><a href="#指针的大小" class="headerlink" title="指针的大小"></a>指针的大小</h3><p>  眼尖的小伙伴可能会注意到，<strong>是不是有一些步骤是多余的？</strong><br>  函数<code>void func(int* p)</code>的参数是一个指针，所以我们需要传入一个变量的地址，那我为什么还要大费周章地在main函数里声明一个整数指针再传入指针呢？<br>  这样的想法是对的！因为指针也是一种数据类型，所以他是占内存空间的！<br>  整数的大小是<code>4</code>字节 字符的大小是<code>1</code>字节<br>  但是指针的占用空间不一样<br>  我们尝试举一些例子</p>
+<p><code>scanf</code>的要求是<code>scanf(格式, 地址)</code>, 在函数<code>scan_int</code>里，他的形参就是一个指针<code>int* ptr</code>，保存的是调用函数时传入的地址，所以在scanf里直接传入<code>ptr</code>便可以把输入保存在<code>main</code>函数的<code>int x</code>中</p>
+<h2 id="进阶玩法"><a href="#进阶玩法" class="headerlink" title="进阶玩法"></a>进阶玩法</h2><p>  一般来说如果要打印出一个数组，我们会有这样的代码</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  如果要扫描来初始化并且输出会是这样</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"char    的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"int     的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"double  的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"char*   的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"int*    的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"double* 的大小为 %zu\n"</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">double</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>编译并运行后控制台的输出会是这样的</p>
-<blockquote>
-<p>char    的大小为 1<br>  int     的大小为 4<br>  double  的大小为 8<br>  char*   的大小为 8<br>  int*    的大小为 8<br>  double* 的大小为 8</p>
-</blockquote>
-<p>虽然指针需要根据指向的数据类型来声明，但无论他们指向的是什么类型，会分配给的大小始终是一样的<br><strong>注意：不同操作系统会分配的大小是不一样的，据我所知64位和32位系统会分配不同大小</strong></p>
-<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><p>  在之前的小节我们已经成功调用了函数<code>func()</code>并且传入了一个实参<code>p</code>也就是<code>int x</code>的地址，那么回到我们上个小节提到的指针占用的空间，我们能不能不在main里额外声明一个指针来保存地址而是直接传入一个地址呢？是可以的</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token comment">//代码</span>
+  <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> arr<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">" %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"arr[%d] = %d\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  但是实际上我们可以分为三个函数来执行 并且用不一样的方式来打印或遍历</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">scan_arr</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">print_arr</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> end<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>  首先声明两个会用到的函数，<code>scan_arr</code>接收一个整数指针和数组大小的整数变量用来扫描控制台输出并且返回一个指向数组最后一个元素的指针，<code>print_arr</code>接收一个指向数组第一个元素的指针和一个指向数组最后一个元素的指针<br>  具体的实现会是这样 </p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token keyword">int</span><span class="token operator">*</span> <span class="token function">scan_arr</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> arr<span class="token punctuation">,</span> <span class="token keyword">int</span> size<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">" %d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>i <span class="token operator">!=</span> size<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> arr<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> arr<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-  <span class="token function">func</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  他们是等价的，在<code>int* p </code>中，指针<code>p</code>中保存的就是<code>&amp;x</code>，所以我们可以直接传入<code>int x</code>的地址<br>  <strong>注意：实际的运用要按照情况来判断，在这个情况下我们想要的是修改main里的局部变量，所以我们可以直接传入地址，真实情况需要考虑函数与栈空间的关系</strong></p>
-<h3 id="运用"><a href="#运用" class="headerlink" title="运用"></a>运用</h3><p>  了解完如何声明，调用，传参，就需要了解如何实际运用指针<br>  在之前的小节里我们只声明了函数签名，而没有实现具体的代码<br>  我们的目的是将main函数里的<code>int x</code>翻倍，而且我们已经在main里调用<code>void func(int* p)</code>并传入main中<code>int x</code>的地址，那么把视角放到函数<code>void func(int* p)</code>中，在这个函空间里我们已知的信息只有一个<code>int* p</code>，并且保存的是调用函数时传入的变量地址，这时就需要之前小节提到的另一个指针运算符<code>*</code>来解引用，也就是解出地址中保存的值</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> p<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token operator">*</span>p <span class="token operator">*=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>  <strong>注意：这里的<code>p</code>的值是调用函数时传入的地址，<code>*p *= 2</code>这一行中 <code>*p</code>里的<code>*</code>是运算符，作用是将<code>p</code>里的地址解析成值，而不是命名的一部分</strong></p>
-<p>  <em><strong>更多指针的内容可以看文章</strong></em> <a href="/2025/07/16/ex-pointer/" title="指针拓展">指针拓展</a></p>
+<span class="token keyword">void</span> <span class="token function">print_arr</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> start<span class="token punctuation">,</span> <span class="token keyword">int</span><span class="token operator">*</span> end<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> p <span class="token operator">=</span> start<span class="token punctuation">;</span> p<span class="token operator">&lt;=</span>end<span class="token punctuation">;</span> p<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"输入数组大小: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> arr<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token function">scan_arr</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">print_arr</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  在<code>main</code>函数中 我们先读一个数组的大小,并且声明一个大小为<code>n</code>的整数数组，这时<code>arr</code>指向的是这个数组空间第一个元素的地址，那么我们调用<code>scan_arr</code>的时候传入的就是<code>arr</code>和<code>n</code>，<strong>要注意的是<code>scan_arr</code>会返回一个指针指向数组最后一个元素的地址</strong> 所以我们需要在<code>main</code>函数里声明一个指针<code>int* ptr</code>来接收返回值，当我们调用<code>print_arr</code>来打印数组时，我们现在有的两个指针正好匹配这个函数的需求，<code>arr</code>就是数组第一个元素的地址 <code>ptr</code>就是数组最后一个元素的地址</p>
+<p>  在<code>scan_arr</code>函数中，我们接收了数组第一个元素的地址，并且根据数组大小来保存控制台输入，**要注意的是当 <code>i == size-1</code>的时候就不能再移动<code>arr</code>的偏移值了，不然最后返回的会变成最后一个元素的下一个地址</p>
+<p>  在<code>print_arr</code>函数中，我们接收了一个头指针和一个尾指针，我们利用<code>for</code>循环的特性 声明一个临时指针并赋值头指针的地址，循环条件为临时指针的地址<code>&lt;=</code>尾指针防止越界，并且每次循环结束将临时指针<code>+= 1</code>也就是偏移一个<code>int</code>的大小<br>  最后我们会有这样的输出</p>
+<blockquote>
+<p>输入数组大小: <em>3</em><br>  <em>1 2 3</em><br>  <code>1</code><br>  <code>2</code><br>  <code>3</code></p>
+</blockquote>
 
                 
             </div>
@@ -553,7 +570,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2025/07/15/pointer/">http://example.com/2025/07/15/pointer/</a>
+                    <a href="http://example.com/2025/07/16/ex-pointer/">http://example.com/2025/07/16/ex-pointer/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -675,17 +692,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2025/07/15/function/">
+                <a href="/2025/07/16/ex-pointer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="函数的基本概念">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="指针拓展">
                         
-                        <span class="card-title">函数的基本概念</span>
+                        <span class="card-title">指针拓展</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -695,9 +713,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-15
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -710,6 +728,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -717,8 +736,8 @@
                         <span class="chip bg-color">C语言</span>
                     </a>
                     
-                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">基础</span>
+                    <a href="/tags/%E6%8C%87%E9%92%88/">
+                        <span class="chip bg-color">指针</span>
                     </a>
                     
                 </div>
@@ -732,13 +751,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/06/24/hello-world/">
+                <a href="/2025/07/15/memory/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -749,7 +768,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-06-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-15
                             </span>
                         <span class="publish-author">
                             
