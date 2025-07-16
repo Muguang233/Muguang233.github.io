@@ -5,7 +5,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="函数的基本概念, 暮光的个人主页">
-    <meta name="description" content="什么是函数">
+    <meta name="description" content="什么是函数  函数可以理解为自定义返回类型，命名,参数，返回值的可重复使用的代码块
+函数类型普通类型  函数类型也可以称为返回类型，决定了这个函数的返回值是什么类型
+
+
+
+类型名
+大小（字节）
+描述
+
+
+
+char
+1
+字符类型
+
+
+int">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -416,7 +432,118 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2>
+                <h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2><p>  函数可以理解为自定义<strong>返回类型</strong>，<strong>命名</strong>,<strong>参数</strong>，<strong>返回值</strong>的可重复使用的代码块</p>
+<h2 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h2><h3 id="普通类型"><a href="#普通类型" class="headerlink" title="普通类型"></a>普通类型</h3><p>  函数类型也可以称为<strong>返回类型</strong>，决定了这个函数的返回值是什么类型</p>
+<table>
+<thead>
+<tr>
+<th>类型名</th>
+<th>大小（字节）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>char</code></td>
+<td>1</td>
+<td>字符类型</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>4</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8</td>
+<td>双精度浮点数</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4</td>
+<td>单精度浮点数</td>
+</tr>
+<tr>
+<td><code>short</code></td>
+<td>2</td>
+<td>短整型</td>
+</tr>
+<tr>
+<td><code>long</code></td>
+<td>4 或 8</td>
+<td>长整型</td>
+</tr>
+<tr>
+<td><code>void</code></td>
+<td>0</td>
+<td>无类型(无返回值)</td>
+</tr>
+</tbody></table>
+<h3 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h3>  <a href="/2025/07/15/pointer/" title="指针">指针</a>类型的返回类型声明为
+<table>
+<thead>
+<tr>
+<th>类型名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>char*</code></td>
+<td>字符指针，字符串</td>
+</tr>
+<tr>
+<td><code>int*</code></td>
+<td>整数指针</td>
+</tr>
+<tr>
+<td><code>float*</code></td>
+<td>浮点数指针</td>
+</tr>
+<tr>
+<td><code>struct 名字*</code></td>
+<td>结构体指针</td>
+</tr>
+</tbody></table>
+<p>  并且返回的是地址，同时在调用时需要声明一个指针来接收返回值</p>
+<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p>  以下代码中，<code>main</code>函数中的<code>int x</code>与<code>func</code>函数中的<code>int x</code>是只属于他们各自代码块中的<strong>局部变量</strong> 在不同的代码块中，因为是局部声明，不仅命名不会冲突，同时也无法访问对方的<code>int x</code>变量，这是因为他们在<a href="/2025/07/15/memory/" title="内存">内存</a>中所处的空间不同，并且在函数<code>func</code>返回时，临时栈空间也会被释放，要做到在函数B访问函数A的局部变量，需要在函数A调用函数B时传入<a href="/2025/07/15/pointer/" title="指针">指针</a></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="形式参数"><a href="#形式参数" class="headerlink" title="形式参数"></a>形式参数</h3><p>  函数的参数分为形式参数和实际参数<br>  形式参数为函数声明的一部分，通常可以理解为 <strong>调用这个函数的时候要传入什么类型的变量</strong><br>  例如</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  函数类型是<code>void</code> 表示不需要<strong>返回值</strong>，并且他的形式参数里是类型为整数<code>int</code>的变量<code>x</code>，<br>  同时形式参数里的<code>int x</code>也是属于<code>func</code>的局部变量</p>
+<h3 id="实际参数"><a href="#实际参数" class="headerlink" title="实际参数"></a>实际参数</h3><p>  实际参数是调用函数时传入的实数(<a href="/2025/07/16/var/" title="左值与右值">左值与右值</a>)<br>  例如在<code>main</code>函数里调用<code>func</code>函数</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">func</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  或者</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token function">func</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p> **注意：func的参数<code>int x</code>是局部变量，所以在func里修改<code>x</code>的值时，<code>main</code>里的值不会被改变</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  x <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"func->x = %d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+  <span class="token function">func</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"main->x = %d\n"</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>func-&gt;x &#x3D; <code>20</code><br>main-&gt;x &#x3D; <code>10</code></p>
+</blockquote>
+
                 
             </div>
             <hr/>
@@ -572,9 +699,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="内存基本概念">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">内存基本概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -589,11 +716,27 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            暮光
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    C语言
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">基础</span>
+                    </a>
+                    
                 </div>
                 
             </div>
