@@ -5,9 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="内存基本概念, 暮光的个人主页">
-    <meta name="description" content="内存空间堆空间  进程或这叫做程序的空间是在运行时向系统申请的临时空间叫做堆 通常会在程序终止时释放
-栈空间  栈空间通常在程序运行中，调用函数时，会在堆空间中申请一个临时空间，并且在函数跳出后释放
-#include &amp;lt;stdio.h">
+    <meta name="description" content="内存空间堆空间  进程或者说程序的空间是在运行时向系统申请的临时空间称之为堆 通常会在程序终止时释放
+栈空间  栈空间通常在程序运行中途调用函数时，向堆空间中申请一个临时空间，并且在函数跳出后释放
+#include &amp;lt;stdio.h&gt;">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -418,8 +418,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="内存空间"><a href="#内存空间" class="headerlink" title="内存空间"></a>内存空间</h2><h3 id="堆空间"><a href="#堆空间" class="headerlink" title="堆空间"></a>堆空间</h3><p>  <strong>进程</strong>或这叫做<strong>程序</strong>的空间是在运行时向<strong>系统</strong>申请的临时空间叫做<strong>堆</strong> 通常会在程序终止时释放</p>
-<h3 id="栈空间"><a href="#栈空间" class="headerlink" title="栈空间"></a>栈空间</h3><p>  <strong>栈空间</strong>通常在程序运行中，调用函数时，会在堆空间中申请一个临时空间，并且在函数跳出后释放</p>
+                <h2 id="内存空间"><a href="#内存空间" class="headerlink" title="内存空间"></a>内存空间</h2><h3 id="堆空间"><a href="#堆空间" class="headerlink" title="堆空间"></a>堆空间</h3><p>  <strong>进程</strong>或者说<strong>程序</strong>的空间是在运行时向<strong>系统</strong>申请的临时空间称之为<strong>堆</strong> 通常会在程序终止时释放</p>
+<h3 id="栈空间"><a href="#栈空间" class="headerlink" title="栈空间"></a>栈空间</h3><p>  <strong>栈空间</strong>通常在程序运行中途调用函数时，向堆空间中申请一个临时空间，并且在函数跳出后释放</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
 <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
