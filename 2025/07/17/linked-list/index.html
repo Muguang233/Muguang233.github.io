@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="暮光的个人主页">
-    <meta name="description" content="">
+    <meta name="keywords" content="链表的基本概念, 暮光的个人主页">
+    <meta name="description" content="前言什么是链表  链表的正规定义是一种线性数据结构，其中的每个元素都是一个节点对象，各个节点通过“引用”相连接 来源  但是简单来讲，链表是由N个节点组成的一个结构，每个节点会包含两种内容：
+
+储存的数据类型
+一个指针，指向下一个节点在内存">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>暮光的个人主页</title>
+    <title>链表的基本概念 | 暮光的个人主页</title>
     <link rel="icon" type="image/jpeg" href="/medias/logo.jpg">
     
 
@@ -334,12 +337,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">链表的基本概念</h1>
                 </div>
             </div>
         </div>
@@ -361,12 +364,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                <span class="chip bg-color">C语言</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
+                                C语言
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -375,7 +395,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2025-07-16
+                    2025-07-17
                 </div>
                 
 
@@ -399,7 +419,19 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="什么是链表"><a href="#什么是链表" class="headerlink" title="什么是链表"></a>什么是链表</h3><p>  链表的正规定义是<strong>一种线性数据结构，其中的每个元素都是一个节点对象，各个节点通过“引用”相连接</strong> <a target="_blank" rel="noopener" href="https://www.hello-algo.com/chapter_array_and_linkedlist/linked_list/">来源</a><br>  但是简单来讲，链表是由<code>N</code>个节点组成的一个结构，<strong>每个节点</strong>会包含两种内容：</p>
+<ol>
+<li>储存的数据类型</li>
+<li>一个<a href="/2025/07/15/pointer/" title="指针">指针</a>，指向下一个节点在内存空间中的地址</li>
+</ol>
+<p>  数据类型可以是任何数据类型，是用户自定义的，可以是整数，可以是字符串，甚至可以是一个结构体<br>  在<strong>C语言</strong>中创建链表，首先我们需要一个<strong>结构体</strong>来<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B0%81%E8%A3%9D_(%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)">封装</a>每个节点</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">struct</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> data<span class="token punctuation">;</span>
+  <span class="token keyword">char</span> name<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> <span class="token class-name">Node</span><span class="token operator">*</span> next<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  C语言链表的节点结构体通常会用<code>Node</code>来命名，<strong>注意的是这不是强制性的，结构体声明是自定义的</strong>，同时节点的结构体中必须包含一个指针<strong>指向下一个节点的地址</strong>保证链表的连续性，但是在内存空间中，每个节点的位置是不连续的，并且**链表的头节点必须保存在</p>
+
                 
             </div>
             <hr/>
@@ -425,7 +457,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2025/07/16/var/">http://example.com/2025/07/16/var/</a>
+                    <a href="http://example.com/2025/07/17/linked-list/">http://example.com/2025/07/17/linked-list/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -462,7 +494,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                                    <span class="chip bg-color">C语言</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -539,9 +579,64 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/07/17/linked-list/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="链表的基本概念">
+                        
+                        <span class="card-title">链表的基本概念</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
+                                    C语言
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">C语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2025/07/17/malloc/">
                     <div class="card-image">
@@ -559,9 +654,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2025-07-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -583,59 +678,6 @@
                     
                     <a href="/tags/%E5%9F%BA%E7%A1%80/">
                         <span class="chip bg-color">基础</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2025/07/16/ex-pointer/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="指针拓展">
-                        
-                        <span class="card-title">指针拓展</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-07-16
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/C%E8%AF%AD%E8%A8%80/" class="post-category">
-                                    C语言
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/C%E8%AF%AD%E8%A8%80/">
-                        <span class="chip bg-color">C语言</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%8C%87%E9%92%88/">
-                        <span class="chip bg-color">指针</span>
                     </a>
                     
                 </div>
